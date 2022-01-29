@@ -4,9 +4,11 @@ const $tableBod = $('#bodyodyodyodoy');
 let score = 0;
 let clickCount = 0;
 let pastScore = JSON.parse(localStorage.getItem('highscore')) || 0;
+$('#highscore').text(`Highscore: ${pastScore}`);
+$('#maingame').css('margin-top','3rem');
 
 async function getCategoryIds() {
-    $('#start').css('display', 'none');
+    $('#start').off('click');
 
     const response = await axios.get('https://jservice.io/api/categories', { params: { count: 100 }})
     
@@ -75,7 +77,7 @@ async function handleClick(quesArr) {
         const tarId = e.target.id;
 
         if(parseInt(tarId.slice(0), 10) === 0) {
-        let qNum = (parseInt(tarId.slice(0), 10) + parseInt(tarId.slice(2), 10));
+        let qNum = parseInt(tarId.slice(2), 10);
         let { question } = quesList[qNum];
         let { answer } = quesList[qNum];
         let askMe = prompt(`${question}`);
@@ -113,7 +115,7 @@ async function handleClick(quesArr) {
                     score += parseInt($(`#${tarId}`).text());
                     alert(`Correct! Your Score is now ${score}`);
                     $(`#${tarId}`).text('');
-                }
+                    }
             } else if( askMe !== answer) {
                 if($(`#${tarId}`).text() == 'no points!') {
                     alert(`Wrong! Correct answer was ${answer}. Your Score is now ${score}`);

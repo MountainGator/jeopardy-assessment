@@ -59,13 +59,15 @@ async function fillTable (categories) {
                 value = 'no points!';
             }
             let $money = $(`<td id="${i}-${x}">${value}</td>`);
-            questions.push({question, answer})
+            answer = answer.replace(/(<([^>]+)>)/ig, '');
+            answer = answer.replace(/"/g, '');
+            questions.push({question, answer});
             $row.append($money);
         }
         $tableBod.append($row);
     }
     
-    return handleClick(questions);
+    handleClick(questions);
 }
 
 async function handleClick(quesArr) {
@@ -77,134 +79,30 @@ async function handleClick(quesArr) {
         const tarId = e.target.id;
 
         if(parseInt(tarId.slice(0), 10) === 0) {
-        let qNum = parseInt(tarId.slice(2), 10);
-        let { question } = quesList[qNum];
-        let { answer } = quesList[qNum];
-        let askMe = prompt(`${question}`);
-        if( askMe == answer) {
-            if($(`#${tarId}`).text() == 'no points!'){
-                alert(`Correct! Your Score is now ${score}`);
-                $(`#${tarId}`).text('');
-            } else {
-                score += parseInt($(`#${tarId}`).text());
-                alert(`Correct! Your Score is now ${score}`);
-                $(`#${tarId}`).text('');
-            }
-        } else if( askMe !== answer) {
-                if($(`#${tarId}`).text() == 'no points!') {
-                    alert(`Wrong! Correct answer was ${answer}. Your Score is now ${score}`);
-                    $(`#${tarId}`).text('');
-                } else {
-                    score -= parseInt($(`#${tarId}`).text());
-                    alert(`Wrong! Correct answer was ${answer}. Your Score is now ${score}`);
-                    $(`#${tarId}`).text('');
-                }
-            }
+            let qNum = parseInt(tarId.slice(2), 10);
+            findQuest(qNum, tarId, quesList);
         }
 
         if(parseInt(tarId.slice(0), 10) === 1) {
             let qNum = (6 + parseInt(tarId.slice(2), 10));
-            let { question } = quesList[qNum];
-            let { answer } = quesList[qNum];
-            let askMe = prompt(`${question}`);
-            if( askMe == answer) {
-                if($(`#${tarId}`).text() == 'no points!'){
-                    alert(`Correct! Your Score is now ${score}`);
-                    $(`#${tarId}`).text('');
-                } else {
-                    score += parseInt($(`#${tarId}`).text());
-                    alert(`Correct! Your Score is now ${score}`);
-                    $(`#${tarId}`).text('');
-                    }
-            } else if( askMe !== answer) {
-                if($(`#${tarId}`).text() == 'no points!') {
-                    alert(`Wrong! Correct answer was ${answer}. Your Score is now ${score}`);
-                    $(`#${tarId}`).text('');
-                } else {
-                    score -= parseInt($(`#${tarId}`).text());
-                    alert(`Wrong! Correct answer was ${answer}. Your Score is now ${score}`);
-                    $(`#${tarId}`).text('');
-                }
-            }
+            findQuest(qNum, tarId, quesList);
         }
         
         if(parseInt(tarId.slice(0), 10) === 2) {
             let qNum = (12 + parseInt(tarId.slice(2), 10));
-            let { question } = quesList[qNum];
-            let { answer } = quesList[qNum];
-            let askMe = prompt(`${question}`);
-            if( askMe == answer) {
-                if($(`#${tarId}`).text() == 'no points!'){
-                    alert(`Correct! Your Score is now ${score}`);
-                    $(`#${tarId}`).text('');
-                } else {
-                    score += parseInt($(`#${tarId}`).text());
-                    alert(`Correct! Your Score is now ${score}`);
-                    $(`#${tarId}`).text('');
-                }
-            } else if( askMe !== answer) {
-                if($(`#${tarId}`).text() == 'no points!') {
-                    alert(`Wrong! Correct answer was ${answer}. Your Score is now ${score}`);
-                    $(`#${tarId}`).text('');
-                } else {
-                    score -= parseInt($(`#${tarId}`).text());
-                    alert(`Wrong! Correct answer was ${answer}. Your Score is now ${score}`);
-                    $(`#${tarId}`).text('');
-                }
-            }
+            findQuest(qNum, tarId, quesList);
         }
 
         if(parseInt(tarId.slice(0), 10) === 3) {
             let qNum = (18 + parseInt(tarId.slice(2), 10));
-            let { question } = quesList[qNum];
-            let { answer } = quesList[qNum];
-            let askMe = prompt(`${question}`);
-            if( askMe == answer) {
-                if($(`#${tarId}`).text() == 'no points!'){
-                    alert(`Correct! Your Score is now ${score}`);
-                    $(`#${tarId}`).text('');
-                } else {
-                    score += parseInt($(`#${tarId}`).text());
-                    alert(`Correct! Your Score is now ${score}`);
-                    $(`#${tarId}`).text('');
-                }
-            } else if( askMe !== answer) {
-                if($(`#${tarId}`).text() == 'no points!') {
-                    alert(`Wrong! Correct answer was ${answer}. Your Score is now ${score}`);
-                    $(`#${tarId}`).text('');
-                } else {
-                    score -= parseInt($(`#${tarId}`).text());
-                    alert(`Wrong! Correct answer was ${answer}. Your Score is now ${score}`);
-                    $(`#${tarId}`).text('');
-                }
-            }
+            findQuest(qNum, tarId, quesList);
         }
 
         if(parseInt(tarId.slice(0), 10) === 4) {
             let qNum = (24 + parseInt(tarId.slice(2), 10));
-            let { question } = quesList[qNum];
-            let { answer } = quesList[qNum];
-            let askMe = prompt(`${question}`);
-            if( askMe == answer) {
-                if($(`#${tarId}`).text() == 'no points!'){
-                    alert(`Correct! Your Score is now ${score}`);
-                    $(`#${tarId}`).text('');
-                } else {
-                    score += parseInt($(`#${tarId}`).text());
-                    alert(`Correct! Your Score is now ${score}`);
-                    $(`#${tarId}`).text('');
-                }
-            } else if( askMe !== answer) {
-                if($(`#${tarId}`).text() == 'no points!') {
-                    alert(`Wrong! Correct answer was ${answer}. Your Score is now ${score}`);
-                    $(`#${tarId}`).text('');
-                } else {
-                    score -= parseInt($(`#${tarId}`).text());
-                    alert(`Wrong! Correct answer was ${answer}. Your Score is now ${score}`);
-                    $(`#${tarId}`).text('');
-                }
-            }
+            findQuest(qNum, tarId, quesList);
         }
+
         clickCount ++;
 
         if (clickCount === 30) {
@@ -221,3 +119,27 @@ async function handleClick(quesArr) {
     }); 
 }
 
+function findQuest (qNum, tarId, quesList) {
+    let { question } = quesList[qNum];
+    let { answer } = quesList[qNum];
+    let askMe = prompt(`${question}`);
+    if( askMe == answer) {
+        if($(`#${tarId}`).text() == 'no points!'){
+            alert(`Correct! Your Score is now ${score}`);
+            $(`#${tarId}`).text('');
+        } else {
+            score += parseInt($(`#${tarId}`).text());
+            alert(`Correct! Your Score is now ${score}`);
+            $(`#${tarId}`).text('');
+        }
+    } else if( askMe !== answer) {
+        if($(`#${tarId}`).text() == 'no points!') {
+            alert(`Wrong! Correct answer was ${answer}. Your Score is now ${score}`);
+            $(`#${tarId}`).text('');
+        } else {
+            score -= parseInt($(`#${tarId}`).text());
+            alert(`Wrong! Correct answer was ${answer}. Your Score is now ${score}`);
+            $(`#${tarId}`).text('');
+        }
+    }
+}

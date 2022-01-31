@@ -61,7 +61,7 @@ async function fillTable (categories) {
             }
             let $money = $(`<td id="${i}-${x}">${value}</td>`);
             answer = answer.replace(/(<([^>]+)>)/ig, '');
-            answer = answer.replace(/"/g, '');
+            answer = answer.replace(/"\.,/g, '');
             questions.push({question, answer});
             $row.append($money);
         }

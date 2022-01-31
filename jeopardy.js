@@ -1,5 +1,6 @@
 
-$('#start').on('click', getCategoryIds)
+$('#start').on('click', getCategoryIds);
+$('#end').on('click', endGame);
 const $tableBod = $('#bodyodyodyodoy');
 let score = 0;
 let clickCount = 0;
@@ -106,15 +107,7 @@ async function handleClick(quesArr) {
         clickCount ++;
 
         if (clickCount === 30) {
-            if (score > pastScore) {
-                alert(`New High Score! Your Score was ${score}`);
-                localStorage.setItem('highscore', JSON.stringify(score));
-                location.reload();
-            }
-            if (score < pastScore) {
-            alert(`Game Over! Your Score was ${score}`);
-            location.reload();
-            }
+            endGame();
         }
     }); 
 }
@@ -122,24 +115,42 @@ async function handleClick(quesArr) {
 function findQuest (qNum, tarId, quesList) {
     let { question } = quesList[qNum];
     let { answer } = quesList[qNum];
+    let lowerA = answer.toLowerCase();
     let askMe = prompt(`${question}`);
-    if( askMe == answer) {
+    let lowerP = askMe.toLowerCase();
+    if( lowerP == lowerA) {
         if($(`#${tarId}`).text() == 'no points!'){
             alert(`Correct! Your Score is now ${score}`);
             $(`#${tarId}`).text('');
+            $(`#${tarId}`).attr("style", "background-color: green; pointer-events: none;")
         } else {
             score += parseInt($(`#${tarId}`).text());
             alert(`Correct! Your Score is now ${score}`);
             $(`#${tarId}`).text('');
+            $(`#${tarId}`).attr("style", "background-color: green; pointer-events: none;")
         }
-    } else if( askMe !== answer) {
+    } else if( lowerP !== lowerA) {
         if($(`#${tarId}`).text() == 'no points!') {
             alert(`Wrong! Correct answer was ${answer}. Your Score is now ${score}`);
             $(`#${tarId}`).text('');
+            $(`#${tarId}`).attr("style", "background-color: red; pointer-events: none;")
         } else {
             score -= parseInt($(`#${tarId}`).text());
             alert(`Wrong! Correct answer was ${answer}. Your Score is now ${score}`);
             $(`#${tarId}`).text('');
+            $(`#${tarId}`).attr("style", "background-color: red; pointer-events: none;")
         }
+    }
+}
+
+function endGame () {
+    if (score > pastScore) {
+        alert(`New High Score! Your Score was ${score}`);
+        localStorage.setItem('highscore', JSON.stringify(score));
+        location.reload();
+    }
+    if (score < pastScore) {
+        alert(`Game Over! Your Score was ${score}`);
+        location.reload();
     }
 }
